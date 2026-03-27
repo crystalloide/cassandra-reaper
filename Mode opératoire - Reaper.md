@@ -207,9 +207,9 @@ Datacenter: ccu
 ===============
 Status=Up/Down
 |/ State=Normal/Leaving/Joining/Moving
---  Address          Load        Tokens  Owns (effective)  Host ID                               Rack
-UN  10.17.64.6    80.06 KiB       16      52.0%             6747a2fb-3f5a-4342-91b5-1f1d177366af  rack1
-UN  10.17.64.5    119.82 KiB      16      48.5%             e2efa530-2ac0-4957-8827-60860279295b  rack1
+--  Address     Load        Tokens  Owns (effective)  Host ID                               Rack
+UN  10.17.64.6  70.2 KiB    16      100.0%            92543ec7-8948-429c-b750-af41c6a2542d  rack1
+UN  10.17.64.5  104.34 KiB  16      100.0%            88d74876-8a3e-4bc6-8e09-6f4c0fccdd60  rack1
 
 ```
 
