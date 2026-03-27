@@ -527,6 +527,8 @@ EXIT;
 
 3. Cliquez sur **"Repair"**
 
+4. Cliquez sur **Activate** pour lancer effectivement la réparation
+
 ### 8.3 Observer la progression
 
 L'interface affiche :
@@ -574,8 +576,6 @@ curl -s -X POST "http://localhost:8080/repair_run" \
 **Avanced settings** permet d'aller plus loin dans les options (intensité, parallèlisme, ...) 
 
 3. Cliquez sur **"Add Schedule"**
-
-4. Cliquez sur **Activate** pour lancer effectivement la réparation
 
 ### 9.2 Créer un planning via l'API
 
