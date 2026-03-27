@@ -93,9 +93,10 @@ avec ses voisins ; les différences sont réconciliées.
 ## 3. Prérequis
 
 ### 3.1 Vérifier que le cluster est opérationnel
-Cassandra 4.1.11 avec Docker Compose (Cluster 2 nœuds)
 
-Cluster Cassandra déployé via Docker Compose avec 4 nœuds sur 2 racks différents dans 2 datacenters.
+Cluster Cassandra déployé via Docker Compose 
+
+Cassandra 4.1.11 : Cluster 2 nœuds sur le rack1 dans le DC 'ccu'
 
 
 #### 1°) Démarrage du cluster
