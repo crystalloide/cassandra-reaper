@@ -9,7 +9,7 @@ cassandra:
   sessionKeyspaceName: "reaper_db"
   loadBalancingPolicy:
     type: default
-    localDataCenter: ccu
+    localDataCenter: "ccu"
 
 hangingRepairTimeoutMins: 30
 incrementalRepair: false
@@ -47,3 +47,4 @@ metrics:
   reporters:
     - type: log
       logger: metrics
+ 
