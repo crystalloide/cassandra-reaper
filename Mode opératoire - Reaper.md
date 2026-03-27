@@ -830,7 +830,6 @@ docker exec -it cassandra01 cqlsh -e "DROP KEYSPACE IF EXISTS reaper_db;"
 docker exec -it cassandra01 cqlsh -e "DROP KEYSPACE IF EXISTS test_repair;"
 ```
 
----
 
 ---
 
