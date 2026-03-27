@@ -31,6 +31,7 @@ _____
 ### Pourquoi réparer dans Cassandra ?
 
 Cassandra utilise un modèle d'**écriture distribuée** sans coordination forte.
+
 Au fil du temps, des **inconsistances** peuvent apparaître entre réplicas à cause de :
 
 | Cause | Explication |
