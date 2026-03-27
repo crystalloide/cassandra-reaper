@@ -1,0 +1,214 @@
+networks:
+  cassandra_network:
+    ipam:
+      config:
+        - subnet: 10.17.64.0/24
+
+# ─────────────────────────────────────────────────────────────
+#  CASSANDRA NODES
+# ─────────────────────────────────────────────────────────────
+services:
+  cassandra01:
+    #image: docker.io/library/cassandra:latest
+    image: cassandra:4.1.11
+    hostname: cassandra01
+    container_name: cassandra01
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 10.17.64.5
+    volumes:
+      - ${PWD}/docker/cassandra01:/var/lib/cassandra
+      - conf01:/opt/cassandra/conf
+    environment:
+      - CASSANDRA_CLUSTER_NAME=archivage-db
+      - CASSANDRA_SEEDS=10.17.64.5,10.17.64.6
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=ccu
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=10.17.64.5
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 100000
+        hard: 100000
+    ports:
+      - "7100:7000"
+      - "9142:9042"
+      - "7199:7199"
+      - "8181:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+  cassandra02:
+    depends_on:
+      cassandra01:
+        condition: service_healthy
+    #image: docker.io/library/cassandra:latest
+    image: cassandra:4.1.11
+    hostname: cassandra02
+    container_name: cassandra02
+    mem_limit: 1g
+    cpus: 0.5
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 10.17.64.6
+    volumes:
+      - ${PWD}/docker/cassandra02:/var/lib/cassandra
+      - conf02:/opt/cassandra/conf
+    environment:
+      - CASSANDRA_CLUSTER_NAME=archivage-db
+      - CASSANDRA_SEEDS=10.17.64.5,10.17.64.6
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=ccu
+      - CASSANDRA_RACK=rack1
+      - CASSANDRA_BROADCAST_RPC_ADDRESS=10.17.64.6
+      - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
+      - MAX_HEAP_SIZE=256m
+      - HEAP_NEWSIZE=50m
+      - LOCAL_JMX=no
+      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=10.17.64.6 -Dcom.sun.management.jmxremote.authenticate=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 100000
+        hard: 100000
+    ports:
+      - "7200:7000"
+      - "9242:9042"
+      - "7299:7199"
+      - "8281:8081"
+    healthcheck:
+      test: ["CMD-SHELL", "grep -q 'Startup complete' /var/log/cassandra/system.log"]
+      interval: 15s
+      timeout: 10s
+      retries: 50
+      start_period: 180s
+
+# ─────────────────────────────────────────────────────────────
+#  CASSANDRA EXPORTERS  (JMX → Prometheus /metrics)
+#  Image : criteord/cassandra_exporter
+#  Chaque sidecar se connecte en JMX à son nœud Cassandra.
+# ─────────────────────────────────────────────────────────────
+  cassandra01-exporter:
+    image: criteord/cassandra_exporter:2.3.8
+    container_name: cassandra01-exporter
+    restart: always
+    depends_on:
+      cassandra01:
+        condition: service_healthy
+    networks:
+      cassandra_network:
+        ipv4_address: 10.17.64.161
+    volumes:
+      - ${PWD}/monitoring/cassandra-exporter/cassandra01.yml:/etc/cassandra_exporter/config.yml:ro
+    ports:
+      - "8180:8080"
+
+  cassandra02-exporter:
+    image: criteord/cassandra_exporter:2.3.8
+    container_name: cassandra02-exporter
+    restart: always
+    depends_on:
+      cassandra02:
+        condition: service_healthy
+    networks:
+      cassandra_network:
+        ipv4_address: 10.17.64.162
+    volumes:
+      - ${PWD}/monitoring/cassandra-exporter/cassandra02.yml:/etc/cassandra_exporter/config.yml:ro
+    ports:
+      - "8280:8080"
+
+
+# ─────────────────────────────────────────────────────────────
+#  PROMETHEUS
+# ─────────────────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: always
+    networks:
+      cassandra_network:
+        ipv4_address: 10.17.64.170
+    volumes:
+      - ${PWD}/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=15d'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+
+# ─────────────────────────────────────────────────────────────
+#  GRAFANA
+# ─────────────────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    depends_on:
+      - prometheus
+    networks:
+      cassandra_network:
+        ipv4_address: 10.17.64.171
+    volumes:
+      - ${PWD}/monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ${PWD}/monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - "3000:3000"
+
+# ─────────────────────────────────────────────────────────────
+#  VOLUMES
+# ─────────────────────────────────────────────────────────────
+volumes:
+  conf01:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra01-conf
+  conf02:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra02-conf
+  conf03:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra03-conf
+  conf04:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/docker/cassandra04-conf
+  prometheus_data:
+  grafana_data:
