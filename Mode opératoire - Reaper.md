@@ -413,9 +413,11 @@ Ouvrez un navigateur et naviguez vers :
 http://localhost:8080/webui/
 ```
 
-Connectez-vous avec :
+Connectez-vous directement 
+Si besoin (ça ne sera pas le cas normalement) :
 - **Utilisateur** : `admin`
 - **Mot de passe** : `admin`
+
 
 ### 7.2 Ajouter le cluster 'archivage-db'
 
@@ -433,15 +435,22 @@ Connectez-vous avec :
 
 Reaper découvre automatiquement les 2 nœuds via le gossip Cassandra.
 
-### 7.3 Vérifier la topologie découverte
+### 7.3 Vérifier la topologie ainsi découverte
 
-Dans le menu **Nodes**, vous devriez voir :
+Dans le menu **Cluster**, en cliquant sur **archivage-db**, vous devriez voir :
 
 ```
-Cluster: archivage-db
-├── Datacenter: ccu
-│   ├── 10.17.64.5  (cassandra01)  Status: UP
-│   └── 10.17.64.6  (cassandra02)  Status: UP
+archivage-db
+
+Nodes: 2
+Total load: 211.9 kB
+Running repairs:
+
+├── ccu  211.9 kB
+ ├── rack1 : 211.9 kB
+         1er noeud         2nd noeud          (sour forme de carrés verts)
+
+     reaper_db
 
 ```
 
