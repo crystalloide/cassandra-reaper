@@ -467,21 +467,23 @@ docker exec -it cassandra01 cqlsh
 ```
 
 ```sql
-CREATE KEYSPACE IF NOT EXISTS test_repair
-WITH replication = {
-  'class': 'NetworkTopologyStrategy',
-  'ccu': 1,
-};
+CREATE KEYSPACE IF NOT EXISTS test_repair WITH replication = {'class': 'NetworkTopologyStrategy', 'ccu': '1'}  AND durable_writes = true;
+```
 
+```sql
 USE test_repair;
+```
 
+```sql
 CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY,
   name TEXT,
   email TEXT,
   created_at TIMESTAMP
 );
+```
 
+```sql
 -- Insérer quelques données de test
 INSERT INTO users (id, name, email, created_at)
 VALUES (uuid(), 'Jon Snow', 'jon@winterfell.north', toTimestamp(now()));
@@ -491,6 +493,12 @@ VALUES (uuid(), 'Daenerys Targaryen', 'dany@dragonstone.sea', toTimestamp(now())
 
 INSERT INTO users (id, name, email, created_at)
 VALUES (uuid(), 'Cersei Lannister', 'cersei@portreal.crown', toTimestamp(now()));
+
+```
+
+```sql
+
+SELECT * FROM users LIMIT 10;
 
 EXIT;
 ```
