@@ -361,7 +361,7 @@ INFO  [...] Started @...ms
 INFO  [...] Reaper is ready
 ```
 
-> Le démarrage peut prendre **1 à 2 minutes** le temps que le schéma soit créé automatiquement
+> Le démarrage peut prendre **3 à 6 minutes** le temps que le schéma soit créé automatiquement
 > dans le keyspace `reaper_db`.
 
 ### 6.3 Vérifier que les tables ont été créées
