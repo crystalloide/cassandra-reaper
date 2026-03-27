@@ -541,6 +541,15 @@ L'interface affiche :
 
 Reaper expose une API REST complète :
 
+1°) via user/password  : 
+
+```bash
+
+# Lancer une réparation (immédiatement, sans planification) :
+curl -s -X POST "http://localhost:8080/repair_run?clusterName=archivage-db&keyspace=test_repair&owner=formation_admin&intensity=0.5&repairParallelism=DATACENTER_AWARE" \
+  -u admin:admin 
+
+2°) via token : 
 ```bash
 # Authentification : récupérer un token JWT
 TOKEN=$(curl -s -X POST http://localhost:8080/login -H "Content-Type: application/json" \
@@ -551,6 +560,7 @@ curl -s -X POST "http://localhost:8080/repair_run?clusterName=archivage-db&keysp
   -H "Authorization: Bearer $TOKEN"
 
 ```
+Cliquer sur **Activate** pour lancer immédiatement le Repair
 
 ---
 
@@ -578,14 +588,8 @@ curl -s -X POST "http://localhost:8080/repair_run?clusterName=archivage-db&keysp
 ### 9.2 Créer un planning via l'API
 
 ```bash
-
-# Authentification : récupérer un token JWT
-TOKEN=$(curl -s -X POST http://localhost:8080/login -H "Content-Type: application/json" \
-  -d '{"username":"admin","password":"admin"}' | jq -r '.token')
-
-
 curl -s -X POST "http://localhost:8080/repair_schedule" \
-  -H "Authorization: Bearer $TOKEN" \
+  -u admin:admin \
   -G \
   --data-urlencode "clusterName=archivage-db" \
   --data-urlencode "keyspace=test_repair" \
@@ -595,7 +599,9 @@ curl -s -X POST "http://localhost:8080/repair_schedule" \
   --data-urlencode "intensity=0.5" \
   --data-urlencode "repairParallelism=DATACENTER_AWARE" \
   --data-urlencode "incrementalRepair=false"
+
 ```
+
 
 ### 9.3 Bonnes pratiques de planification
 
@@ -739,10 +745,15 @@ Pour réparer uniquement le DC `DC1` sans toucher au second DC `DC2` :
 2. Ou via l'API :
 
 ```bash
+
 curl -s -X POST "http://localhost:8080/repair_run" \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "clusterName=formation&keyspace=test_repair&datacenters=DC1&owner=admin"
+  -u admin:admin \
+  -G \
+  --data-urlencode "archivage-db" \
+  --data-urlencode "keyspace=test_repair" \
+  --data-urlencode "datacenters=DC1" \
+  --data-urlencode "owner=admin"
+
 ```
 
 ### 11.4 Interrompre et reprendre une réparation
@@ -750,12 +761,14 @@ curl -s -X POST "http://localhost:8080/repair_run" \
 ```bash
 # Lister les réparations en cours
 curl -s "http://localhost:8080/repair_run?cluster=archivage-db&state=RUNNING" \
+  -u admin:admin \
   -H "Authorization: Bearer $TOKEN" | jq '.[].id'
 ```
 
 ```bash
 # Mettre en pause (remplacer <RUN_ID> par l'ID obtenu)
 curl -s -X PUT "http://localhost:8080/repair_run/<RUN_ID>/state/PAUSED" \
+  -u admin:admin \
   -H "Authorization: Bearer $TOKEN"
 ```
 
