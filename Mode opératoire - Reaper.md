@@ -1,4 +1,7 @@
-# TP — Cassandra Reaper : Réparation centralisée du cluster
+____
+# Mode opératoire de déploiement et utilisation deCassandra Reaper : 
+# Outillage de gestion centralisée des Repair sur le cluster Cassandra
+_____
 
 > **Contexte** : Cluster Cassandra (`archivage-db`) de 2 noeuds dans 1 datacenter (`ccu`),
 > 1 rack (`rack1`), monitoré par Prometheus + Grafana.
