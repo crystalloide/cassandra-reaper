@@ -235,8 +235,11 @@ Le port JMX **7199** est exposé sur chaque nœud (ex : `7199:7199` pour cassand
 
 ### 4.1 Ajouter le service `reaper`
 
-Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml` **Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana.yml**
+Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml` 
+**Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana.yml**
 **après** les blocs des exporters et **avant** Prometheus :
+
+
 
 ```yaml
 # ─────────────────────────────────────────────────────────────
@@ -272,11 +275,15 @@ Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml
       start_period: 60s
 ```
 
-#### Affichage du fichier complet : 
+ce qui vous donnera ce fichier complet présent ici : 
+**Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana_Reaper.yml**
+
+#### Affichage du fichier complet avec ajout service Reaper : 
 ```bash
 cd ~/cassandra-reaper
-cat Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana.yml
+cat Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana_Reaper.yml
 ```
+
 
 ### 4.2 Explication des paramètres clés
 
@@ -334,7 +341,7 @@ EXIT;
 ### 6.1 Démarrer Reaper
 
 ```bash
-docker compose -f Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana_Reaper.yml up -d reaper
+docker compose -f Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana_Reaper.yml up -d reaper
 ```
 
 ### 6.2 Suivre les logs
