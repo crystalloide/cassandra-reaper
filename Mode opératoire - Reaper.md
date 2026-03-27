@@ -767,12 +767,24 @@ curl -s "http://localhost:8080/repair_run?cluster=archivage-db&state=RUNNING" \
   -u admin:admin \
   -H "Authorization: Bearer $TOKEN" | jq '.[].id'
 ```
+#### Affichage exemple en retour : 
+"46438d60-29f3-11f1-9b84-4b500ff462a4"
 
 ```bash
 # Mettre en pause (remplacer <RUN_ID> par l'ID obtenu)
 curl -s -X PUT "http://localhost:8080/repair_run/<RUN_ID>/state/PAUSED" \
   -u admin:admin \
   -H "Authorization: Bearer $TOKEN"
+```
+#### Ce qui donne dans notre exemple : 
+
+curl -s -X PUT "http://localhost:8080/repair_run/46438d60-29f3-11f1-9b84-4b500ff462a4/state/PAUSED"  -u admin:admin 
+
+#### Lister les réparations en Pause :
+```bash
+curl -s "http://localhost:8080/repair_run?cluster=archivage-db&state=PAUSED" \
+  -u admin:admin \
+  -H "Authorization: Bearer $TOKEN" | jq '.[].id'
 ```
 
 ```bash
@@ -781,9 +793,21 @@ curl -s -X PUT "http://localhost:8080/repair_run/<RUN_ID>/state/RUNNING" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
+#### Ce qui donne dans notre exemple : 
+
+curl -s -X PUT "http://localhost:8080/repair_run/46438d60-29f3-11f1-9b84-4b500ff462a4/state/RUNNING"  -u admin:admin 
+
+
+#### Lister les réparations quelque soit leurs états :
+```bash
+curl -s "http://localhost:8080/repair_run?cluster=archivage-db" \
+  -u admin:admin \
+  -H "Authorization: Bearer $TOKEN" | jq '.[].id'
+```
+
 ---
 
-## 12. Nettoyage
+## 12. Nettoyage Complet ( pour supprimer Reaper) 
 
 ```bash
 # Supprimer les réparations terminées de l'interface
@@ -805,28 +829,6 @@ docker exec -it cassandra01 cqlsh -e "DROP KEYSPACE IF EXISTS test_repair;"
 ```
 
 ---
-
-## 13. Questions de validation
-
-Répondez aux questions suivantes pour valider vos acquis :
-
-1. **Qu'est-ce que `gc_grace_seconds` et pourquoi conditionne-t-il la fréquence des réparations ?**
-
-2. **Quelle différence y a-t-il entre une réparation `SEQUENTIAL`, `PARALLEL` et `DATACENTER_AWARE` ?
-   Laquelle est recommandée en production multi-DC et pourquoi ?**
-
-3. **Pourquoi le keyspace `reaper_db` utilise-t-il `NetworkTopologyStrategy` avec un facteur
-   de réplication par datacenter ?**
-
-4. **Qu'est-ce qu'un segment de réparation ? Comment le paramètre `REAPER_SEGMENT_COUNT_PER_NODE`
-   influence-t-il les performances et la granularité du suivi ?**
-
-5. **Dans le scénario 11.1, que se passe-t-il si le nœud `cassandra03` reste arrêté plus de
-   `max_hint_window_in_ms` (par défaut 3 heures) ? La réparation suffit-elle à récupérer
-   les données ?**
-
-6. **Quel est le rôle du paramètre `REAPER_REPAIR_INTENSITY` ? Quels sont les risques
-   d'une intensité trop élevée en production ?**
 
 ---
 
