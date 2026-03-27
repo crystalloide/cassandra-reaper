@@ -1,6 +1,6 @@
 ____
-# Mode opératoire de déploiement et utilisation deCassandra Reaper : 
-# Outillage de gestion centralisée des Repair sur le cluster Cassandra
+## Mode opératoire de déploiement et utilisation de Cassandra Reaper : 
+## Outillage de gestion centralisée des Repair sur le cluster Cassandra
 _____
 
 > **Contexte** : Cluster Cassandra (`archivage-db`) de 2 noeuds dans 1 datacenter (`ccu`),
