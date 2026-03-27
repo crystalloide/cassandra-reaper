@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+
+  - job_name: 'cassandra'
+    static_configs:
+      - targets:
+          - 'cassandra01-exporter:8080'
+          - 'cassandra02-exporter:8080'
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '(cassandra0\d)-exporter:8080'
+        target_label: instance
+        replacement: '${1}'
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['prometheus:9090']

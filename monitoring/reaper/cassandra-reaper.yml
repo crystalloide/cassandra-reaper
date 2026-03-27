@@ -1,0 +1,49 @@
+storageType: cassandra
+cassandra:
+  type: basic
+  contactPoints:
+    - host: "10.17.64.5"   # cassandra01 
+      port: 9042
+    - host: "10.17.64.6"   # cassandra02 
+      port: 9042
+  sessionKeyspaceName: "reaper_db"
+  loadBalancingPolicy:
+    type: default
+    localDataCenter: ccu
+
+hangingRepairTimeoutMins: 30
+incrementalRepair: false
+repairIntensity: 0.9
+repairParallelism: DATACENTER_AWARE
+repairRunThreadCount: 15
+
+autoScheduling:
+  enabled: true
+  initialDelayPeriod: PT15S
+  periodBetweenPolls: PT10M
+  timeBeforeFirstSchedule: PT5M
+  scheduleSpreadPeriod: PT6H
+  adaptive: true
+
+accessControl:
+  enabled: false
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+logging:
+  level: INFO
+  loggers:
+    io.cassandrareaper: DEBUG
+    com.datastax.driver: WARN
+
+metrics:
+  frequency: 1 minute
+  reporters:
+    - type: log
+      logger: metrics
