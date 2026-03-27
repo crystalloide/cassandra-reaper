@@ -182,7 +182,7 @@ docker ps -a
 docker logs cassandra01
 ```
 
-#### 4°) Vérification du cluster (après 5-10 minutes)
+#### 4°) Vérification du cluster (après 5-8 minutes)
 
 #### Regarder les ports à l'écoute :
 ```bash
@@ -235,7 +235,7 @@ Le port JMX **7199** est exposé sur chaque nœud (ex : `7199:7199` pour cassand
 
 ### 4.1 Ajouter le service `reaper`
 
-Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml`,
+Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml` **Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana.yml**
 **après** les blocs des exporters et **avant** Prometheus :
 
 ```yaml
@@ -275,7 +275,7 @@ Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml
 #### Affichage du fichier complet : 
 ```bash
 cd ~/cassandra-reaper
-cat Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana_Reaper.yml
+cat Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana.yml
 ```
 
 ### 4.2 Explication des paramètres clés
