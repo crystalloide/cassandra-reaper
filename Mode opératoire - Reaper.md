@@ -543,15 +543,13 @@ Reaper expose une API REST complète :
 
 ```bash
 # Authentification : récupérer un token JWT
-TOKEN=$(curl -s -X POST http://localhost:8080/login \
-  -H "Content-Type: application/json" \
+TOKEN=$(curl -s -X POST http://localhost:8080/login -H "Content-Type: application/json" \
   -d '{"username":"admin","password":"admin"}' | jq -r '.token')
 
 # Lancer une réparation
-curl -s -X POST "http://localhost:8080/repair_run" \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "clusterName=archivage-db&keyspace=test_repair&owner=formation_admin&intensity=0.5&repairParallelism=DATACENTER_AWARE"
+curl -s -X POST "http://localhost:8080/repair_run?clusterName=archivage-db&keyspace=test_repair&owner=formation_admin&intensity=0.5&repairParallelism=DATACENTER_AWARE" \
+  -H "Authorization: Bearer $TOKEN"
+
 ```
 
 ---
@@ -560,7 +558,7 @@ curl -s -X POST "http://localhost:8080/repair_run" \
 
 ### 9.1 Créer un planning via l'UI
 
-1. Cliquez sur **"Schedule"** → **"+ New Schedule"**
+1. Cliquez sur **"Schedule"** → **"Add a new schedule"**
 2. Configurez :
 
 | Champ | Valeur |
@@ -580,17 +578,23 @@ curl -s -X POST "http://localhost:8080/repair_run" \
 ### 9.2 Créer un planning via l'API
 
 ```bash
+
+# Authentification : récupérer un token JWT
+TOKEN=$(curl -s -X POST http://localhost:8080/login -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"admin"}' | jq -r '.token')
+
+
 curl -s -X POST "http://localhost:8080/repair_schedule" \
   -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "clusterName=archivage-db\
-&keyspace=test_repair\
-&owner=ops_team\
-&scheduleDaysBetween=7\
-&scheduleTriggerTime=$(date -u +%Y-%m-%dT02:00:00 -d 'tomorrow')\
-&intensity=0.5\
-&repairParallelism=DATACENTER_AWARE\
-&incrementalRepair=false"
+  -G \
+  --data-urlencode "clusterName=archivage-db" \
+  --data-urlencode "keyspace=test_repair" \
+  --data-urlencode "owner=ops_team" \
+  --data-urlencode "scheduleDaysBetween=7" \
+  --data-urlencode "scheduleTriggerTime=$(date -u +%Y-%m-%dT02:00:00 -d 'tomorrow')" \
+  --data-urlencode "intensity=0.5" \
+  --data-urlencode "repairParallelism=DATACENTER_AWARE" \
+  --data-urlencode "incrementalRepair=false"
 ```
 
 ### 9.3 Bonnes pratiques de planification
