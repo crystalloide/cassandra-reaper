@@ -505,7 +505,7 @@ EXIT;
 
 ### 8.2 Déclencher une réparation via l'UI
 
-1. Dans l'interface Reaper, cliquez sur **"Repair"** → **"+ New Repair"**
+1. Dans l'interface Reaper, cliquez sur **"Repair"** → **"Start a new repair"**
 2. Renseignez :
 
 | Champ | Valeur |
