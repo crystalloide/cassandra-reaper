@@ -19,3 +19,6 @@ cassandra-reaper
 
 6°) Ajout d'un job schédulé dans Reaper :
 <img width="2284" height="742" alt="image" src="https://github.com/user-attachments/assets/f1ece660-4ad3-43fc-95d6-5a77441fd7a1" />
+
+7°) Métriques Reaper dans dashboard Grafana :
+<img width="2247" height="346" alt="image" src="https://github.com/user-attachments/assets/52dace24-0515-41f7-ae02-02c557604b27" />
