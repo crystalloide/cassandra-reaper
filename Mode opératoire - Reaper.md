@@ -551,7 +551,7 @@ TOKEN=$(curl -s -X POST http://localhost:8080/login \
 curl -s -X POST "http://localhost:8080/repair_run" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "clusterName=formation&keyspace=test_repair&owner=formation_admin&intensity=0.5&repairParallelism=DATACENTER_AWARE"
+  -d "clusterName=archivage-db&keyspace=test_repair&owner=formation_admin&intensity=0.5&repairParallelism=DATACENTER_AWARE"
 ```
 
 ---
@@ -583,7 +583,7 @@ curl -s -X POST "http://localhost:8080/repair_run" \
 curl -s -X POST "http://localhost:8080/repair_schedule" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/x-www-form-urlencoded" \
-  -d "clusterName=formation\
+  -d "clusterName=archivage-db\
 &keyspace=test_repair\
 &owner=ops_team\
 &scheduleDaysBetween=7\
