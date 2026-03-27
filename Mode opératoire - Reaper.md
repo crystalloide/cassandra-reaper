@@ -5,7 +5,7 @@ _____
 
 > **Contexte** : Cluster Cassandra (`archivage-db`) de 2 noeuds dans 1 datacenter (`ccu`),
 > 1 rack (`rack1`), monitoré par Prometheus + Grafana.
-> Ce TP ajoute un service **Reaper** centralisé et guide sa mise en œuvre complète.
+> Ce mode opératoire indique comment ajouter un service **Reaper** centralisé et guide sa mise en œuvre complète.
 
 ---
 
