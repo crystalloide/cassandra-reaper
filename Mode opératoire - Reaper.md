@@ -23,7 +23,6 @@ _____
 10. [Surveiller les réparations dans Grafana](#10-surveiller-les-réparations-dans-grafana)
 11. [Scénarios avancés](#11-scénarios-avancés)
 12. [Nettoyage](#12-nettoyage)
-13. [Questions de validation](#13-questions-de-validation)
 
 ---
 
