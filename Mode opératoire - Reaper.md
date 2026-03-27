@@ -319,7 +319,10 @@ AND durable_writes = true;
 ```sql
 DESCRIBE KEYSPACE reaper_db;
 ```
+##### Affichage attendu :  
+CREATE KEYSPACE reaper_db WITH replication = {'class': 'NetworkTopologyStrategy', 'ccu': '1'}  AND durable_writes = true;
 
+##### On sort du cqlsh :  
 ```sql
 EXIT;
 ```
