@@ -424,7 +424,7 @@ Connectez-vous avec :
 
 | Champ | Valeur |
 |---|---|
-| **Seed node** | `10.17.64.151` |
+| **Seed node** | `10.17.64.5` |
 | **JMX port** | `7199` |
 | **JMX username** | *(laisser vide)* |
 | **JMX password** | *(laisser vide)* |
