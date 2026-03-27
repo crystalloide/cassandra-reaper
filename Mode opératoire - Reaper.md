@@ -163,7 +163,7 @@ docker compose -f Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana.yml logs
 
 #### Dans un autre terminal, pour suivre  :
 ```bash
-cd ~
+cd ~/cassandra-reaper
 docker ps -a 
 ```
 #### Affichage (exemple) ': 
