@@ -274,7 +274,7 @@ Ajoutez le bloc suivant dans la section `services:` de votre `docker-compose.yml
 
 #### Affichage du fichier complet : 
 ```bash
-cd ~/cassandra-tp00
+cd ~/cassandra-reaper
 cat Cluster_4_noeuds_2_racks_2_DC_Prometheus_Grafana_Reaper.yml
 ```
 
