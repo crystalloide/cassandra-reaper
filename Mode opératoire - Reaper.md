@@ -575,6 +575,8 @@ curl -s -X POST "http://localhost:8080/repair_run" \
 
 3. Cliquez sur **"Add Schedule"**
 
+4. Cliquez sur **Activate** pour lancer effectivement la réparation
+
 ### 9.2 Créer un planning via l'API
 
 ```bash
