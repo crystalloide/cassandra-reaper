@@ -2,8 +2,8 @@
 cassandra-reaper
 
 1°) Ajout d'un Cluster dans l'UI Reaper :
-Ecran_1_Ajout_Cluster_dans_Reaper.png
-https://github.com/crystalloide/cassandra-reaper/blob/main/Ecran_1_Ajout_Cluster_dans_Reaper.png
+[Ecran_1_Ajout_Cluster_dans_Reaper.png
+Ecran_1_Ajout_Cluster_dans_Reaper.png](https://github.com/crystalloide/cassandra-reaper/blob/f3ef1017f4eac37c98723543fe3a4750863307bd/Ecran_1_Ajout_Cluster_dans_Reaper.png)
 
 2°) Ajout d'un repair sur le keyspace test_repair dans l'UI Reaper :
 Ecran_2_Ajout_Repair_keyspace_test_repair_dans_Reaper.png
