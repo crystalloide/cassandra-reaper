@@ -620,8 +620,8 @@ curl -s -X POST "http://localhost:8080/repair_schedule" \
 ```
 
 > **Règle d'or** :
-   >> La fréquence des réparations doit être **inférieure à `gc_grace_seconds`**.
-   >> Si un nœud est absent plus de `gc_grace_seconds`, il faut le reparer (nodetool repair) ou le supprimer et le ré-ajouter.
+   - La fréquence des réparations doit être **inférieure à `gc_grace_seconds`**.
+   - Si un nœud est absent plus de `gc_grace_seconds`, il faut le reparer (nodetool repair) ou le supprimer et le ré-ajouter.
 
 ---
 
