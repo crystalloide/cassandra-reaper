@@ -549,6 +549,8 @@ Reaper expose une API REST complète :
 curl -s -X POST "http://localhost:8080/repair_run?clusterName=archivage-db&keyspace=test_repair&owner=formation_admin&intensity=0.5&repairParallelism=DATACENTER_AWARE" \
   -u admin:admin 
 
+```
+
 2°) via token : 
 ```bash
 # Authentification : récupérer un token JWT
