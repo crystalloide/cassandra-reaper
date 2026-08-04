@@ -9,6 +9,7 @@ scrape_configs:
       - targets:
           - 'cassandra01-exporter:8080'
           - 'cassandra02-exporter:8080'
+          - 'cassandra03-exporter:8080'
     relabel_configs:
       - source_labels: [__address__]
         regex: '(cassandra0\d)-exporter:8080'
