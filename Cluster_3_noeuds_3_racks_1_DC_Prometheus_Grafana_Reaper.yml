@@ -26,7 +26,6 @@ services:
       - ${PWD}/docker/cassandra01:/var/lib/cassandra
       - conf01:/opt/cassandra/conf
     environment:
-      # definition de la topologie du cluster
       - CASSANDRA_CLUSTER_NAME=archivage-db
       - CASSANDRA_DC=ccu
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
@@ -50,8 +49,8 @@ services:
       - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
-       - MAX_HEAP_SIZE=2g
-       - HEAP_NEWSIZE=400m
+      - MAX_HEAP_SIZE=2g
+      - HEAP_NEWSIZE=400m
     ulimits:
       memlock:
         soft: -1
@@ -98,7 +97,6 @@ services:
       - ${PWD}/docker/cassandra02:/var/lib/cassandra
       - conf02:/opt/cassandra/conf
     environment:
-      # definition de la topologie du cluster
       - CASSANDRA_CLUSTER_NAME=archivage-db
       - CASSANDRA_DC=ccu
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
@@ -122,8 +120,8 @@ services:
       - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
-       - MAX_HEAP_SIZE=2g
-       - HEAP_NEWSIZE=400m
+      - MAX_HEAP_SIZE=2g
+      - HEAP_NEWSIZE=400m
     ulimits:
       memlock:
         soft: -1
@@ -170,7 +168,6 @@ services:
       - ${PWD}/docker/cassandra02:/var/lib/cassandra
       - conf02:/opt/cassandra/conf
     environment:
-      # definition de la topologie du cluster
       - CASSANDRA_CLUSTER_NAME=archivage-db
       - CASSANDRA_DC=ccu
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
@@ -194,8 +191,8 @@ services:
       - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
-       - MAX_HEAP_SIZE=2g
-       - HEAP_NEWSIZE=400m
+      - MAX_HEAP_SIZE=2g
+      - HEAP_NEWSIZE=400m
     ulimits:
       memlock:
         soft: -1
@@ -283,7 +280,7 @@ services:
         condition: service_healthy
       cassandra02:
         condition: service_healthy
-       cassandra03:
+      cassandra03:
         condition: service_healthy
     networks:
       cassandra_network:
