@@ -51,7 +51,6 @@ services:
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
       - MAX_HEAP_SIZE=2g
-      - HEAP_NEWSIZE=400m
     ulimits:
       memlock:
         soft: -1
@@ -123,7 +122,6 @@ services:
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
       - MAX_HEAP_SIZE=2g
-      - HEAP_NEWSIZE=400m
     ulimits:
       memlock:
         soft: -1
@@ -195,7 +193,6 @@ services:
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
       - MAX_HEAP_SIZE=2g
-      - HEAP_NEWSIZE=400m
     ulimits:
       memlock:
         soft: -1
