@@ -1,4 +1,4 @@
-host: 10.17.64.6:7199
+host: 10.17.64.7:7199
 ssl: false
 user: cassandra
 password: cassandra
