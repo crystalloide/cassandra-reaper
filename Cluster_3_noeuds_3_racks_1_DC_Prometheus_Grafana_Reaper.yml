@@ -166,8 +166,8 @@ services:
       cassandra_network:
         ipv4_address: 10.17.64.7
     volumes:
-      - ${PWD}/docker/cassandra02:/var/lib/cassandra
-      - conf02:/opt/cassandra/conf
+      - ${PWD}/docker/cassandra03:/var/lib/cassandra
+      - conf03:/opt/cassandra/conf
     environment:
       - CASSANDRA_CLUSTER_NAME=archivage-db
       - CASSANDRA_DC=ccu
