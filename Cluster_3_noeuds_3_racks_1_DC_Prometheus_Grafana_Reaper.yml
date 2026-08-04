@@ -48,7 +48,7 @@ services:
 #      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false -javaagent:/var/lib/axonops/axon-cassandra4.0-agent.jar=/etc/axonops/axon-agent.yml
 #      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=4 -XX:ParallelGCThreads=16 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
       - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
-       - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
+      - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
       - MAX_HEAP_SIZE=2g
