@@ -1,6 +1,10 @@
 storageType: cassandra
 cassandra:
   type: basic
+  authProvider:
+    type: plain-text
+    username: reaper
+    password: reaperdb
   contactPoints:
     - host: "10.17.64.5"   # cassandra01 
       port: 9042
