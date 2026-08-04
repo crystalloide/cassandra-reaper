@@ -138,10 +138,10 @@ cat Cluster_2_noeuds_1_rack_1_DC_Prometheus_Grafana.yml
 #### 2°) Créer les répertoires de volumes :
 ```bash
 sudo rm -Rf ~/cassandra-reaper/docker/cassandra*
-mkdir -p ~/cassandra-reaper/docker/cassandra01 ~/cassandra-reaper/docker/cassandra02 
+mkdir -p ~/cassandra-reaper/docker/cassandra01 ~/cassandra-reaper/docker/cassandra02 ~/cassandra-reaper/docker/cassandra03 
 ```
 ```bash
-mkdir -p ~/cassandra-reaper/docker/cassandra01-conf ~/cassandra-reaper/docker/cassandra02-conf
+mkdir -p ~/cassandra-reaper/docker/cassandra01-conf ~/cassandra-reaper/docker/cassandra02-conf ~/cassandra-reaper/docker/cassandra03-conf
 ```
 #### On affiche les répertoires créés :
 ```bash
@@ -149,8 +149,8 @@ ls ~/cassandra-reaper/docker
 ```
 ##### Affichage : 
 ```bash
-     cassandra01       cassandra02       
-     cassandra01-conf  cassandra02-conf 
+     cassandra01       cassandra02       cassandra03    
+     cassandra01-conf  cassandra02-conf  cassandra03-conf
 ```
 
 #### 3°) Démarrage du cluster avec Docker Compose
