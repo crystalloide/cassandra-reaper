@@ -18,7 +18,7 @@ services:
     #mem_limit: 20G
     #cpus: 5
     mem_limit: 4g
-    cpus: 1.0
+    cpus: 2.0
     restart: always
     networks:
       cassandra_network:
@@ -46,8 +46,9 @@ services:
       - CASSANDRA_BROADCAST_RPC_ADDRESS=10.17.64.5
       - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
 #      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false -javaagent:/var/lib/axonops/axon-cassandra4.0-agent.jar=/etc/axonops/axon-agent.yml
-      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=4 -XX:ParallelGCThreads=16 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
-      - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
+#      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=4 -XX:ParallelGCThreads=16 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
+      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
+       - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
       - MAX_HEAP_SIZE=2g
@@ -89,7 +90,7 @@ services:
     #mem_limit: 20G
     #cpus: 5
     mem_limit: 4g
-    cpus: 1.0
+    cpus: 2.0
     restart: always
     networks:
       cassandra_network:
@@ -117,7 +118,8 @@ services:
       - CASSANDRA_BROADCAST_RPC_ADDRESS=10.17.64.6
       - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
 #      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=10.17.64.6 -Dcom.sun.management.jmxremote.authenticate=false -javaagent:/var/lib/axonops/axon-cassandra4.0-agent.jar=/etc/axonops/axon-agent.yml
-      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=4 -XX:ParallelGCThreads=16 -Djava.rmi.server.hostname=10.17.64.6 -Dcom.sun.management.jmxremote.authenticate=false 
+#      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=4 -XX:ParallelGCThreads=16 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
+      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
       - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
@@ -160,7 +162,7 @@ services:
     #mem_limit: 20G
     #cpus: 5
     mem_limit: 4g
-    cpus: 1.0
+    cpus: 2.0
     restart: always
     networks:
       cassandra_network:
@@ -188,7 +190,8 @@ services:
       - CASSANDRA_BROADCAST_RPC_ADDRESS=10.17.64.7
       - CASSANDRA_NATIVE_TRANSPORT_PORT=9042
 #      - JVM_EXTRA_OPTS=-Djava.rmi.server.hostname=10.17.64.7 -Dcom.sun.management.jmxremote.authenticate=false -javaagent:/var/lib/axonops/axon-cassandra4.0-agent.jar=/etc/axonops/axon-agent.yml
-      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=4 -XX:ParallelGCThreads=16 -Djava.rmi.server.hostname=10.17.64.7 -Dcom.sun.management.jmxremote.authenticate=false 
+#      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=4 -XX:ParallelGCThreads=16 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
+      - JVM_EXTRA_OPTS=-XX:-UseG1GC -XX:+UseZGC -XX:+AlwaysPreTouch -XX:ConcGCThreads=2 -XX:ParallelGCThreads=2 -Djava.rmi.server.hostname=10.17.64.5 -Dcom.sun.management.jmxremote.authenticate=false 
       - CASSANDRA_AUTHENTICATOR=PasswordAuthenticator
 #      - MAX_HEAP_SIZE=256m
 #      - HEAP_NEWSIZE=50m
