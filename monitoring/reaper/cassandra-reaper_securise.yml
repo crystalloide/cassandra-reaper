@@ -1,0 +1,67 @@
+storageType: cassandra
+cassandra:
+  type: basic
+  authProvider:
+    type: plain-text
+    username: reaper
+    password: reaperdb
+  contactPoints:
+    - host: "10.17.64.5"   # cassandra01 
+      port: 9042
+    - host: "10.17.64.6"   # cassandra02 
+      port: 9042
+    - host: "10.17.64.7"   # cassandra03 
+      port: 9042
+  sessionKeyspaceName: "reaper_db"
+  loadBalancingPolicy:
+    type: default
+    localDataCenter: "ccu"
+
+hangingRepairTimeoutMins: 30
+incrementalRepair: false
+repairIntensity: 0.9
+repairParallelism: DATACENTER_AWARE
+repairRunThreadCount: 15
+
+autoScheduling:
+  enabled: true
+  initialDelayPeriod: PT15S
+  periodBetweenPolls: PT10M
+  timeBeforeFirstSchedule: PT5M
+  scheduleSpreadPeriod: PT6H
+  adaptive: true
+
+accessControl:
+  enabled: true
+  sessionTimeout: PT10M
+  jwt:
+# Généré avec openssl rand -base64 32
+    secret: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZG1pbiIsInJvbGUiOiJvcGVyYXRvciIsImV4cCI6IjIwMzEtMDgtMDdUMTE6NTU6MTkrMDA6MDAifQ.6HAVRehfobbIcDqqy5il1VCi-mrcuPSBdnPLvEHVQWs"
+  users:
+    - username: "admin"
+      password: "mot-de-passe-super-secure"
+      roles: ["operator"]
+    - username: "user"
+      password: "user"
+      roles: ["user"]
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+logging:
+  level: INFO
+  loggers:
+    io.cassandrareaper: DEBUG
+    com.datastax.driver: WARN
+
+metrics:
+  frequency: 1 minute
+  reporters:
+    - type: log
+      logger: metrics
+ 
